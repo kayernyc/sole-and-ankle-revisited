@@ -5,6 +5,7 @@ import { COLORS, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import { QUERIES } from '../../constants';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
