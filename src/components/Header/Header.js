@@ -7,24 +7,15 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import { QUERIES } from '../../constants';
 import Icon from '../Icon';
+import UnstyledButton from '../UnstyledButton';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
-  // For our mobile hamburger menu, we'll want to use a button
-  // with an onClick handler, something like this:
-  //
-  // <button onClick={() => setShowMobileMenu(true)}>
-
   return (
-    <header>
+    <SiteHeader>
       <SuperHeader />
-      <PhoneHeader>
-        <Logo />
-        <Icon id="shopping-bag" />
-        <PhoneHeaderSearch id="search" />
-        <Icon id="menu" />
-      </PhoneHeader>
       <MainHeader>
         <Side>
           <Logo />
@@ -37,6 +28,20 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <PhoneHeader>
+          <UnstyledButton>
+            <Icon id="shopping-bag" />
+            <VisuallyHidden>Shopping bag</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <PhoneHeaderSearch id="search" />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+          <Icon id="menu" />
+            <VisuallyHidden>Menu</VisuallyHidden>
+          </UnstyledButton>
+        </PhoneHeader>
         <Side />
       </MainHeader>
 
@@ -44,47 +49,52 @@ const Header = () => {
         isOpen={showMobileMenu}
         onDismiss={() => setShowMobileMenu(false)}
       />
-    </header>
+    </SiteHeader>
   );
 };
 
+const SiteHeader = styled.header`
+  isolation: isolate;
+  z-index: 1;
+`
+
 const PhoneHeaderSearch = styled(Icon)`
   margin-top: 1px;
+  margin-right: -1px;
 `
 
 const PhoneHeader = styled.div`
   display: none;
-
-  @media ${QUERIES.phoneMax} {
+  
+  @media ${QUERIES.tabletMax} { 
+    display: inline-flex;
     align-items: center;
-    border-bottom: 1px solid ${COLORS.gray[300]};
-    border-top: 4px black solid;
-    display: flex;
-    gap: 17px;
-    height: 72px;
-    padding: 18px 32px;
+    display: inline-flex;
+    gap: 34px;
     justify-content: flex-end;
-    max-width: 100%;
+    width: 100%;
 
     & > * {
-      flex: 0 0 0;
+      flex: 0;
     }
+  }
 
-    & > *:first-child {
-      flex-grow: 1;
-    }
+  @media ${QUERIES.phoneMax} {
+    gap: 17px;
   }
 `
 
 const MainHeader = styled.div`
-  display: flex;
   align-items: baseline;
+  display: flex;
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
-  @media ${QUERIES.phoneMax} {
-    display: none;
+  @media ${QUERIES.tabletMax} {
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
   }
 `;
 
@@ -92,6 +102,10 @@ const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletMax} {
+    display: none;
+  }
 `;
 
 const Side = styled.div`

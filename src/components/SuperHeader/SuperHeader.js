@@ -34,8 +34,14 @@ const Wrapper = styled.div`
   padding-left: 32px;
   padding-right: 32px;
 
-  @media ${QUERIES.phoneMax} {
-    display: none;
+  @media ${QUERIES.tabletMax} {
+    border-top: 4px black solid;
+    height: 0;
+    padding: 0;
+
+    & > * {
+      display: none;
+    }
   }
 `;
 
