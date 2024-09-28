@@ -50,7 +50,6 @@ const Header = () => {
 
 const PhoneHeaderSearch = styled(Icon)`
   margin-top: 1px;
-
 `
 
 const PhoneHeader = styled.div`

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { QUERIES } from '../../constants';
 
 import { COLORS, WEIGHTS } from '../../constants';
 
@@ -23,7 +24,11 @@ const Sidebar = () => {
   );
 };
 
-const Wrapper = styled.aside``;
+const Wrapper = styled.aside`
+  @media ${QUERIES.tabletMax} {
+    display: none;
+  }
+`;
 
 const Link = styled.a`
   display: block;
