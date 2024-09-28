@@ -6,6 +6,7 @@ import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import { QUERIES } from '../../constants';
+import Icon from '../Icon';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -18,6 +19,12 @@ const Header = () => {
   return (
     <header>
       <SuperHeader />
+      <PhoneHeader>
+        <Logo />
+        <Icon id="shopping-bag" />
+        <PhoneHeaderSearch id="search" />
+        <Icon id="menu" />
+      </PhoneHeader>
       <MainHeader>
         <Side>
           <Logo />
@@ -41,12 +48,45 @@ const Header = () => {
   );
 };
 
+const PhoneHeaderSearch = styled(Icon)`
+  margin-top: 1px;
+
+`
+
+const PhoneHeader = styled.div`
+  display: none;
+
+  @media ${QUERIES.phoneMax} {
+    align-items: center;
+    border-bottom: 1px solid ${COLORS.gray[300]};
+    border-top: 4px black solid;
+    display: flex;
+    gap: 17px;
+    height: 72px;
+    padding: 18px 32px;
+    justify-content: flex-end;
+    max-width: 100%;
+
+    & > * {
+      flex: 0 0 0;
+    }
+
+    & > *:first-child {
+      flex-grow: 1;
+    }
+  }
+`
+
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media ${QUERIES.phoneMax} {
+    display: none;
+  }
 `;
 
 const Nav = styled.nav`
